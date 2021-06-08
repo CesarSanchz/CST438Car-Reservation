@@ -10,18 +10,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cst438.domain.*;
 
-public interface CarRepository extends JpaRepository<Car, Long>{
+public interface ReservationRepository extends JpaRepository<Reservation, Long>{
 	
-	List<Car> findAll();
+	List<Reservation> findAll();
 	
-	@Query("SELECT c FROM Car c ORDER BY price")
-	List<Car> findByPrice();
-    
-	@Query(value = "SELECT * FROM Car WHERE id = ?1", nativeQuery = true)
-    List<Car> findById(int id);
-    
-	@Query(value = "SELECT * FROM Car  WHERE city LIKE ?1", nativeQuery = true)
-	List<Car> findByCity(String city);
-    
+	
+	//@Query(value = "SELECT * FROM Reservation WHERE id = ?1", nativeQuery = true)
+	//List<Reservation> findById(int id);
+	
+	@Query(value = "SELECT * FROM Reservations WHERE id = ?1", nativeQuery = true)
+    List<Reservation> findById(int id);
 
 }
