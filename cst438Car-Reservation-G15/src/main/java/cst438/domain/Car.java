@@ -16,11 +16,13 @@ public class Car {
 	private String transmission;
 	private int year;
 	private int price;
+	private String city;
 	
 	public Car () {
 	}
 	
-	public Car(int id, String make, String model, String fuel, String transmission, int year, int price) {
+
+	public Car(int id, String make, String model, String fuel, String transmission, int year, int price, String city) {
 		super();
 		this.id = id;
 		this.make = make;
@@ -29,6 +31,7 @@ public class Car {
 		this.transmission = transmission;
 		this.year = year;
 		this.price = price;
+		this.city = city;
 	}
 
 	public int getId() {
@@ -87,6 +90,13 @@ public class Car {
 		this.price = price;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -97,6 +107,11 @@ public class Car {
 		if (getClass() != obj.getClass())
 			return false;
 		Car other = (Car) obj;
+		if (city == null) {
+			if (other.city != null)
+				return false;
+		} else if (!city.equals(other.city))
+			return false;
 		if (fuel == null) {
 			if (other.fuel != null)
 				return false;
@@ -126,10 +141,11 @@ public class Car {
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Car [id=" + id + ", make=" + make + ", model=" + model + ", fuel=" + fuel + ", transmission="
-				+ transmission + ", year=" + year + ", price=" + price + "]";
+				+ transmission + ", year=" + year + ", price=" + price + ", city=" + city + "]";
 	}
 	
 }
