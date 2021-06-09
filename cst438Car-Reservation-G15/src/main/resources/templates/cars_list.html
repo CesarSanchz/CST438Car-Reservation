@@ -15,6 +15,7 @@
 			<th>Fuel Type</th>
 			<th>Transmission</th>
 			<th>Price</th>
+			<th>City</th>
 			<th></th>
 		</tr>
 		<tr th:each="Car :${Car}">
@@ -25,6 +26,7 @@
 			<td th:text = "${Car.fuel}" th:name = "fuel"></td>
 			<td th:text = "${Car.transmission}" th:name = "transmission"></td>			
 			<td th:text = "${Car.price}" th:name = "Price"></td>
+			<td th:text = "${Car.city}" th:name = "City"></td>
 			<td><button> Reserve Car </td>
 			
 		</tr>

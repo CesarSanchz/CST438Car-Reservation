@@ -21,19 +21,33 @@ public class CarController {
 	@Autowired
 	private CarRepository CarRepository;
 	
-	@GetMapping("/allCars")
-	public String getAllCars(Model model) {
-		List<Car> cars_list = CarRepository.findByPrice();
-		model.addAttribute("Car", cars_list);
-		
-		return "cars_list";
-		
-	}
+	@Autowired
+	CarService carService;
 	
+	
+	//Landing page
 	@GetMapping("/")
 	public String getIndex(Model model) {
 		return "index";
 	}
 	
+	//Page used to get all cars that are not reserved
+	@GetMapping("/allCars")
+	public String getAllCars(Model model) {
+		List<Car> cars_list = CarRepository.findByPrice();
+		model.addAttribute("Car", cars_list);		
+		return "cars_list";
+	}
+	
+	//Page to filter cars by City wanted by customer
+	@PostMapping("/select_reservationByCity")
+	public String getCarByCity(@RequestParam("city") String city,Model model ) {
+		List<Car> cars = carService.getCarByCity(city);
+		model.addAttribute("city", cars);
+		return "reservation_page";
+	}
+		  
+
+
 
 }

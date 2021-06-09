@@ -9,6 +9,7 @@
 	<h2>Please select a city.</h2>
 	<br/>
 	<label for="cars">Choose a city:</label>
+	<form action ="#" th:action="@{/select_reservationByCity}" th:object="${car}" method = "post">
 	  <select th:id="city" th:name="cars">
 	    <option value="seattle">Seattle</option>
 	    <option value="san francisco">San Francisco</option>
@@ -17,7 +18,9 @@
 	    <option value="washington d.c.">Washingotn D.C.</option>
 	    <option value="san diego">San Diego</option>
   	  </select>
+  	 
   	<input type="submit">
+  	 </form>
 	<br/>
 	<h2>To check your current reservation input your username and reservation number</h2>
 </body>
