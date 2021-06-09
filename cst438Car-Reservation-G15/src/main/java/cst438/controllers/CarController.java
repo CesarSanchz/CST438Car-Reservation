@@ -41,13 +41,11 @@ public class CarController {
 	
 	//Page to filter cars by City wanted by customer
 	@PostMapping("/select_reservationByCity")
-	public String getCarByCity(@RequestParam("city") String city,Model model ) {
+	public String getCarByCity(@RequestParam("city") String city, Model model ) {
 		List<Car> cars = carService.getCarByCity(city);
 		model.addAttribute("city", cars);
 		return "reservation_page";
 	}
-		  
-
-
+		 
 
 }
