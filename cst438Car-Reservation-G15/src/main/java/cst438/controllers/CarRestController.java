@@ -42,20 +42,13 @@ public class CarRestController {
 	@GetMapping("/getCarByCity")
 	  public List<Car> getCarByCity(@RequestParam("city") String city) {
 	    //List<Car> cars = carRepository.findByCity(city);
-	    
+		System.out.append("THIS getCar By City debug" );
 		
 		
 		
 		List<Car> cars = carService.getCarByCity(city);
 		
-	    
-	    
-	    
-	    
-	    
-	    
-	    return cars;
-	    System.out.println("Hello, World!"); 
+	    return cars; 
 	  }
 	
 	@GetMapping("/getReservation")

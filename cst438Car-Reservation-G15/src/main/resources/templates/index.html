@@ -10,7 +10,11 @@
 	<br/>
 	<label for="cars">Choose a city:</label>
 	<form action ="#" th:action="@{/select_reservationByCity}" th:object="${car}" method = "post">
-	  <select th:id="city" th:name="cars">
+	<!--    <select th:id="city" th:field="*{city}">     -->
+	   <select th:id="city" th:name="cars">   
+	  <!-- changed the * to a $ by city -->
+	<!--   <select th:id="city" th:name="car" th:field = "${city}"> -->
+	    <option>Select Option</option>
 	    <option value="seattle">Seattle</option>
 	    <option value="san francisco">San Francisco</option>
 	    <option value="new york">New York</option>

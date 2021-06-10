@@ -14,6 +14,7 @@ public interface CarRepository extends JpaRepository<Car, Long>{
 	
 	List<Car> findAll();
 	
+	
 	@Query("SELECT c FROM Car c ORDER BY price")
 	List<Car> findByPrice();
     
@@ -23,5 +24,6 @@ public interface CarRepository extends JpaRepository<Car, Long>{
 	@Query(value = "SELECT * FROM Car  WHERE city LIKE ?1", nativeQuery = true)
 	List<Car> findByCity(String city);
     
+	
 
 }
