@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import cst438.domain.*;
+import cst438.repositories.CarRepository;
 import cst438.services.*;
 
 @RestController
@@ -21,6 +22,9 @@ public class CarRestController {
 	
 	@Autowired
 	CarService carService;
+	
+	@Autowired
+	private CarRepository carRepository;
 	
 	@GetMapping("/getAllCars")
 	public List<Car> getAllCars() {
@@ -37,8 +41,21 @@ public class CarRestController {
 	
 	@GetMapping("/getCarByCity")
 	  public List<Car> getCarByCity(@RequestParam("city") String city) {
-	    List<Car> cars = carService.getCarByCity(city);
+	    //List<Car> cars = carRepository.findByCity(city);
+	    
+		
+		
+		
+		List<Car> cars = carService.getCarByCity(city);
+		
+	    
+	    
+	    
+	    
+	    
+	    
 	    return cars;
+	    System.out.println("Hello, World!"); 
 	  }
 	
 	@GetMapping("/getReservation")
