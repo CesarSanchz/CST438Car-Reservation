@@ -19,6 +19,8 @@ public interface CarRepository extends JpaRepository<Car, Long>{
     
 	@Query(value = "SELECT * FROM Car WHERE id = ?1", nativeQuery = true)
     List<Car> findById(int id);
+	
+	Car findCarById(int id);
     
 	@Query(value = "SELECT * FROM Car  WHERE city LIKE ?1", nativeQuery = true)
 	List<Car> findByCity(String city);

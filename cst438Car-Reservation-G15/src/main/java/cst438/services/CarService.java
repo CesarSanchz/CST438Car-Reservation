@@ -37,9 +37,9 @@ public class CarService {
 	
 	// Car APIs
 	
-	public List<Car> getCarById(int id) {
+	public Car getCarById(int id) {
 		
-		return carRepository.findById(id);
+		return carRepository.findCarById(id);
 		
 	}
 	
@@ -63,6 +63,18 @@ public class CarService {
 	
 	// Reservation APIs
 	
+	public Reservation makeReservation(int car_id, String email) {
+		int id = car_id;
+		Car car = carRepository.findCarById(id);
+		Reservation reservation = new Reservation(car, email);
+		System.out.println("Reserving car ID:" + car_id + ", for email:" + email);
+		reservationRepository.save(reservation);
+		
+		Reservation reservationFromDb = reservationRepository.findByEmail(email);
+		
+		return reservationFromDb;
+	}
+	
 	// Get reservations by ID
 	// http://localhost:8080/api/getReservation/id?rid=5
 	public List<Reservation> getReservationById(int rid) {
@@ -70,12 +82,45 @@ public class CarService {
 		
 	}
 	
-	
 	public List<Reservation> getReservation() {
 		
 		return reservationRepository.findAll();
 		
 	}
+	
+	public Reservation getReservationEmail(String email){
+		return reservationRepository.findByEmail(email);
+	}
+
+	public List<Reservation> findEmails(String email) {
+		// TODO Auto-generated method stub
+		return reservationRepository.findEmails(email);
+	}
+	
+	/*
+	 public Reservation makeReservation(int id, String email) {
+		    Car car = carRepository.findById(id);
+		    Seat seat = seatRepository.findBySeatId(seatId);
+
+		    // Check if any of the entered IDs are invalid
+		    if (user == null || flight == null || seat == null) {
+		      return null;
+		    }
+
+		    // Set seat to unavailable
+		    seatRepository.setSeatToUnavailable(seatId);
+
+		    Reservation reservation = new Reservation(user, passengerFirstName, passengerLastName, flight,
+		        seat, flight.getPrice());
+
+		    reservationRepository.save(reservation);
+
+		    Reservation reservationFromDb =
+		        reservationRepository.findByReservationId(reservation.getReservationId());
+
+		    return reservationFromDb;
+		  }
+	 */
 		
 	
 }

@@ -18,6 +18,9 @@ public class Reservation {
 	@Column(name = "rid")
 	private int rid;
 	
+	//@Column(name = "car_id")
+	//private int car_id;
+	
 	@ManyToOne
 	@JoinColumn(name = "car_id", referencedColumnName = "id")
 	private Car car_id;
@@ -29,9 +32,8 @@ public class Reservation {
 	public Reservation () {
 	}
 
-	public Reservation(int rid, Car car_id, @NotNull @Size(min = 3, max = 45) String email) {
+	public Reservation(Car car_id, @NotNull @Size(min = 3, max = 45) String email) {
 		super();
-		this.rid = rid;
 		this.car_id = car_id;
 		this.email = email;
 	}
@@ -59,6 +61,7 @@ public class Reservation {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -88,6 +91,7 @@ public class Reservation {
 	public String toString() {
 		return "Reservation [rid=" + rid + ", car_id=" + car_id + ", email=" + email + "]";
 	}
+
 	
 	
 	

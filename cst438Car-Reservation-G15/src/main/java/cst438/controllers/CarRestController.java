@@ -1,5 +1,6 @@
 package cst438.controllers;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,8 +40,8 @@ public class CarRestController {
 	}
 	
 	@GetMapping("/getCarById")
-	  public List<Car> getCarById(@RequestParam("id") int id) {
-	    List<Car> cars = carService.getCarById(id);
+	  public Car getCarById(@RequestParam("id") int id) {
+	    Car cars = carService.getCarById(id);
 	    return cars;
 	  }
 	
@@ -51,11 +54,27 @@ public class CarRestController {
 	// Reservation APIs
 	// Section for reservation Details
 	
+	@GetMapping("/reserve")
+	public Reservation addReservation(@RequestParam("car_id")int car_id, @RequestParam("email") String email) {
+		System.out.println("Attempting to reserve " + car_id + " for " + email);
+		
+		Reservation reservation = carService.makeReservation(car_id, email);
+		
+		return reservation;
+				
+	}
+	
 	@GetMapping("/getReservation")
 	  public List<Reservation> getReservation() {
 	    List<Reservation> reservation = carService.getReservation();
 	    return reservation;
 	  }
+	
+	@GetMapping("/getReservationEmail")
+	public List<Reservation> getReservationEmail(String email){
+		List<Reservation> reservation = carService.findEmails(email);
+		return reservation;
+	}
 	
 	
 	@GetMapping("/getReservation/id")
