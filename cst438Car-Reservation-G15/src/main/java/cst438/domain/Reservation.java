@@ -1,8 +1,11 @@
 package cst438.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -12,9 +15,12 @@ import javax.validation.constraints.Size;
 public class Reservation {
 	
 	@Id
-	private int id;
+	@Column(name = "rid")
+	private int rid;
 	
-	private int car_id;
+	@ManyToOne
+	@JoinColumn(name = "car_id", referencedColumnName = "id")
+	private Car car_id;
 	
 	@NotNull
 	@Size(min= 3, max=45)
@@ -23,27 +29,26 @@ public class Reservation {
 	public Reservation () {
 	}
 
-	public Reservation(int id, int car_id, @NotNull @Size(min = 3, max = 45) String email) {
+	public Reservation(int rid, Car car_id, @NotNull @Size(min = 3, max = 45) String email) {
 		super();
-		this.id = id;
+		this.rid = rid;
 		this.car_id = car_id;
 		this.email = email;
 	}
 
-
-	public int getId() {
-		return id;
+	public int getRid() {
+		return rid;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setRid(int rid) {
+		this.rid = rid;
 	}
 
-	public int getCar_id() {
+	public Car getCar_id() {
 		return car_id;
 	}
 
-	public void setCar_id(int car_id) {
+	public void setCar_id(Car car_id) {
 		this.car_id = car_id;
 	}
 
@@ -55,7 +60,6 @@ public class Reservation {
 		this.email = email;
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -65,23 +69,26 @@ public class Reservation {
 		if (getClass() != obj.getClass())
 			return false;
 		Reservation other = (Reservation) obj;
-		if (car_id != other.car_id)
+		if (car_id == null) {
+			if (other.car_id != null)
+				return false;
+		} else if (!car_id.equals(other.car_id))
 			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (id != other.id)
+		if (rid != other.rid)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Reservation [id=" + id + ", car_id=" + car_id + ", email=" + email + "]";
+		return "Reservation [rid=" + rid + ", car_id=" + car_id + ", email=" + email + "]";
 	}
 	
 	
-
+	
 }

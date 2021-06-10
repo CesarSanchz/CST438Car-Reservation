@@ -3,6 +3,8 @@ package cst438.services;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,8 @@ import cst438.repositories.ReservationRepository;
 
 @Service
 public class CarService {
+	
+	private static final Logger log = LoggerFactory.getLogger(CarService.class);
 	
 	@Autowired
 	private CarRepository carRepository;
@@ -31,6 +35,8 @@ public class CarService {
 				car.getPrice(), car.getCity());
 	}
 	
+	// Car APIs
+	
 	public List<Car> getCarById(int id) {
 		
 		return carRepository.findById(id);
@@ -38,8 +44,14 @@ public class CarService {
 	}
 	
 	public List<Car> getCarByCity(String city) {
+		List<Car> cars = carRepository.findByCity(city);
+		List<Car> carInfo = new ArrayList<>();
 		
-		return carRepository.findByCity(city);
+		for(Car car:cars) {
+			carInfo.add(getCar(car.getId()));
+		}
+		
+		return carInfo;
 		
 	}
 	
@@ -49,17 +61,21 @@ public class CarService {
 		
 	}
 	
-	public List<Reservation> getReservationById(int id) {
-		
-		return reservationRepository.findById(id);
+	// Reservation APIs
+	
+	// Get reservations by ID
+	// http://localhost:8080/api/getReservation/id?rid=5
+	public List<Reservation> getReservationById(int rid) {
+		return reservationRepository.findById(rid);
 		
 	}
+	
 	
 	public List<Reservation> getReservation() {
 		
 		return reservationRepository.findAll();
 		
 	}
-	
+		
 	
 }

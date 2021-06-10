@@ -1,18 +1,8 @@
 package cst438.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-@Entity
-@Table(name="car")
-public class Car {
+public class CarInfo {
 	
-	@Id
 	private int id;
-	
 	private String make;
 	private String model;
 	private String fuel;
@@ -21,10 +11,9 @@ public class Car {
 	private int price;
 	private String city;
 	
-	public Car () {
-	}
-
-	public Car(int id, String make, String model, String fuel, String transmission, int year, int price, String city) {
+	
+	public CarInfo(int id, String make, String model, String fuel, String transmission, int year, int price,
+			String city) {
 		super();
 		this.id = id;
 		this.make = make;
@@ -36,65 +25,81 @@ public class Car {
 		this.city = city;
 	}
 
+
 	public int getId() {
 		return id;
 	}
+
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
+
 	public String getMake() {
 		return make;
 	}
+
 
 	public void setMake(String make) {
 		this.make = make;
 	}
 
+
 	public String getModel() {
 		return model;
 	}
+
 
 	public void setModel(String model) {
 		this.model = model;
 	}
 
+
 	public String getFuel() {
 		return fuel;
 	}
+
 
 	public void setFuel(String fuel) {
 		this.fuel = fuel;
 	}
 
+
 	public String getTransmission() {
 		return transmission;
 	}
+
 
 	public void setTransmission(String transmission) {
 		this.transmission = transmission;
 	}
 
+
 	public int getYear() {
 		return year;
 	}
+
 
 	public void setYear(int year) {
 		this.year = year;
 	}
 
+
 	public int getPrice() {
 		return price;
 	}
+
 
 	public void setPrice(int price) {
 		this.price = price;
 	}
 
+
 	public String getCity() {
 		return city;
 	}
+
 
 	public void setCity(String city) {
 		this.city = city;
@@ -109,7 +114,7 @@ public class Car {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Car other = (Car) obj;
+		CarInfo other = (CarInfo) obj;
 		if (city == null) {
 			if (other.city != null)
 				return false;
@@ -144,11 +149,12 @@ public class Car {
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Car [id=" + id + ", make=" + make + ", model=" + model + ", fuel=" + fuel + ", transmission="
+		return "CarInfo [id=" + id + ", make=" + make + ", model=" + model + ", fuel=" + fuel + ", transmission="
 				+ transmission + ", year=" + year + ", price=" + price + ", city=" + city + "]";
 	}
-
 	
+
 }

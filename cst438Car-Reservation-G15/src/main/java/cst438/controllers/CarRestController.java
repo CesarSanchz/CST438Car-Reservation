@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import cst438.domain.*;
+import cst438.repositories.ReservationRepository;
 import cst438.services.*;
 
 @RestController
@@ -21,6 +23,11 @@ public class CarRestController {
 	
 	@Autowired
 	CarService carService;
+	
+	@Autowired
+	ReservationRepository reservationRepository;
+	
+	// Car APIs
 	
 	@GetMapping("/getAllCars")
 	public List<Car> getAllCars() {
@@ -41,17 +48,40 @@ public class CarRestController {
 	    return cars;
 	  }
 	
+	// Reservation APIs
+	// Section for reservation Details
+	
 	@GetMapping("/getReservation")
 	  public List<Reservation> getReservation() {
 	    List<Reservation> reservation = carService.getReservation();
 	    return reservation;
 	  }
 	
-	@GetMapping("/getReservationById")
-	  public List<Reservation> getReservationById(@RequestParam("id") int id) {
-	    List<Reservation> reservation = carService.getReservationById(id);
+	
+	@GetMapping("/getReservation/id")
+	  public List<Reservation> getReservationId(@RequestParam("rid") int rid) {
+	    List<Reservation> reservation = carService.getReservationById(rid);
 	    return reservation;
 	  }
+	
+	
+	
+	@DeleteMapping("/getReservation/id")
+	public ResponseEntity<Reservation> deleteReservation(@RequestParam("rid") int rid ) {
+		List<Reservation> reservation = reservationRepository.findById(rid);
+		
+		if ( reservation.size()==0) {
+			// reservation ID not found.  Send 404 return code.
+			return new ResponseEntity<Reservation>( HttpStatus.NOT_FOUND);
+		} else {
+			for (Reservation c : reservation) {
+				reservationRepository.delete(c);
+			}
+			// return 204,  request successful.  no content returned.
+			return new ResponseEntity<Reservation>( HttpStatus.NO_CONTENT);
+		}
+		
+	}
 	
 	//@GetMapping("/api/cars/{city}")
    // public ResponseEntity<Car> getWeather(@PathVariable("city") String city) {
