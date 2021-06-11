@@ -54,7 +54,7 @@ public class CarRestController {
 	// Reservation APIs
 	// Section for reservation Details
 	
-	@GetMapping("/reserve")
+	@PostMapping("/reserve")
 	public Reservation addReservation(@RequestParam("car_id")int car_id, @RequestParam("email") String email) {
 		System.out.println("Attempting to reserve " + car_id + " for " + email);
 		
