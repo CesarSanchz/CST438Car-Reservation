@@ -233,7 +233,7 @@ rid (required) int
     }
 ]
 ```
-## Get Reservations by Email
+## DeleteReservations by RID
 `/api/getReservation/id`
 
 `Type: DELETE`
