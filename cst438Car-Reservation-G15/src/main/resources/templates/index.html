@@ -8,8 +8,10 @@
 	<h1> Welcome to Car Rental</h1>
 	<h2>Please select a city.</h2>
 	<br/>
+	<form th:action="@{/select_reservationByCity}" th:object="${city}" method = "post">
 	<label for="cars">Choose a city:</label>
-	  <select th:id="city" th:name="cars">
+	  <select th:id="city" th:name="city">
+	    <option>Select</option>
 	    <option value="seattle">Seattle</option>
 	    <option value="san francisco">San Francisco</option>
 	    <option value="new york">New York</option>
@@ -18,6 +20,7 @@
 	    <option value="san diego">San Diego</option>
   	  </select>
   	<input type="submit">
+  	</form>
 	<br/>
 	<h2>To check your current reservation input your username and reservation number</h2>
 </body>

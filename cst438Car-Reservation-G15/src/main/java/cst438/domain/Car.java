@@ -3,6 +3,8 @@ package cst438.domain;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name="car")
@@ -10,6 +12,7 @@ public class Car {
 	
 	@Id
 	private int id;
+	
 	private String make;
 	private String model;
 	private String fuel;
@@ -20,7 +23,6 @@ public class Car {
 	
 	public Car () {
 	}
-	
 
 	public Car(int id, String make, String model, String fuel, String transmission, int year, int price, String city) {
 		super();
@@ -98,6 +100,7 @@ public class Car {
 		this.city = city;
 	}
 
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -141,11 +144,11 @@ public class Car {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Car [id=" + id + ", make=" + make + ", model=" + model + ", fuel=" + fuel + ", transmission="
 				+ transmission + ", year=" + year + ", price=" + price + ", city=" + city + "]";
 	}
+
 	
 }

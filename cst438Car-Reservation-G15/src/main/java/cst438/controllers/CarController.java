@@ -1,5 +1,6 @@
 package cst438.controllers;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -21,6 +22,9 @@ public class CarController {
 	@Autowired
 	private CarRepository CarRepository;
 	
+	@Autowired
+	CarService carService;
+	
 	@GetMapping("/allCars")
 	public String getAllCars(Model model) {
 		List<Car> cars_list = CarRepository.findByPrice();
@@ -32,8 +36,23 @@ public class CarController {
 	
 	@GetMapping("/")
 	public String getIndex(Model model) {
+		Reservation reservation = new Reservation();
+		Car car = new Car();
+		model.addAttribute("reservation", reservation);
+		model.addAttribute("car", car);
 		return "index";
 	}
+	
+	//Page to filter cars by City wanted by customer
+    @PostMapping("/select_reservationByCity")
+    public String getCarByCity(@RequestParam("city") String city, Model model ) throws ParseException {
+    	System.out.println("Before: ");
+        List<Car> cars = carService.getCarByCity(city);
+        model.addAttribute("car", cars);
+        System.out.println("Cars info: ");
+        return "reservation_page";
+    }
+      
 	
 
 }
