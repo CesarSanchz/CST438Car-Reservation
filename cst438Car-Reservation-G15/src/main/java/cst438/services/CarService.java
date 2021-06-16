@@ -95,32 +95,6 @@ public class CarService {
 	public List<Reservation> findEmails(String email) {
 		// TODO Auto-generated method stub
 		return reservationRepository.findEmails(email);
-	}
-	
-	/*
-	 public Reservation makeReservation(int id, String email) {
-		    Car car = carRepository.findById(id);
-		    Seat seat = seatRepository.findBySeatId(seatId);
-
-		    // Check if any of the entered IDs are invalid
-		    if (user == null || flight == null || seat == null) {
-		      return null;
-		    }
-
-		    // Set seat to unavailable
-		    seatRepository.setSeatToUnavailable(seatId);
-
-		    Reservation reservation = new Reservation(user, passengerFirstName, passengerLastName, flight,
-		        seat, flight.getPrice());
-
-		    reservationRepository.save(reservation);
-
-		    Reservation reservationFromDb =
-		        reservationRepository.findByReservationId(reservation.getReservationId());
-
-		    return reservationFromDb;
-		  }
-	 */
-		
+	}	
 	
 }
