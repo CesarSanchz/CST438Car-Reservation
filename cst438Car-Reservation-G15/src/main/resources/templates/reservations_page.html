@@ -6,7 +6,8 @@
 </head>
 <body>
     <h1> Make a selection to finish reservation!</h1>
-    <form action ="#" th:action="@{/select_reservationByCity}" th:object="${car}" method = "post">
+    <h1> Cars in </h1>
+    <form action ="#" th:action="@{/select/reservation_page}" th:object="${car}" method = "post">
     <table>
         <tr>
             <th>Year</th>
@@ -25,7 +26,7 @@
             <td th:text = "${Car.fuel}" th:name = "fuel"></td>
             <td th:text = "${Car.transmission}" th:name = "transmission"></td>            
             <td th:text = "${Car.price}" th:name = "Price"></td>
-            <td><button> Reserve Car</button></td>
+            <td><button> Reserve Car respage</button></td>
             
         </tr>
     </table>
